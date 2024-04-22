@@ -3,6 +3,7 @@ import {
   DisputesReturn,
   EventReturn,
   FilterTasksReturn,
+  RFPReturn,
   TaskReturn,
   TotalEventsReturn,
   TotalUsdValueReturn,
@@ -33,6 +34,18 @@ export async function getTask(
   )
   checkError(res)
   return JSON.parse(JSON.stringify(res.data), reviver)
+}
+
+export async function getRFP(
+  chainId: number,
+  rfpId: bigint
+): Promise<RFPReturn> {
+  const res = await axios.get(
+    `${backendBaseUrl}/rfp/${chainId.toString()}/${rfpId.toString()}`
+  )
+  checkError(res)
+  return JSON.parse(JSON.stringify(res.data), reviver)
+
 }
 
 export async function getEvent(eventIndex: number): Promise<EventReturn> {
